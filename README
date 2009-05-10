@@ -1,0 +1,6 @@
+Django-Jamendo
+==============
+
+A django pluggable app to store, browse and search jamendo.com data/api
+by Matías Agustín Méndez - matagus[at]gmail.com
+published under New BSD License
