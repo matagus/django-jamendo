@@ -2,4 +2,5 @@ Dependencies
 ============
 
 * Django (1, 1, 0, 'alpha', 1)
-* django-tagging
+* django-tagging: http://code.google.com/p/django-tagging/
+* django-pagination: http://code.google.com/p/django-pagination/

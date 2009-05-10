@@ -1,0 +1,8 @@
+TODO - django-jamendo
+=====================
+
+* distutils + buildout
+* Make a django command to smartly import (creating or updating data) jamendo db dump.
+* Update models by quering Jamendo webservice.
+* Integrate with Pinax. Build a sample project!
+
