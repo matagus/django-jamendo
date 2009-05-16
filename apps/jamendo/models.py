@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-
+from tagging.models import Tag
 
 class HistoryMixin(models.Model):
     # creation date time
@@ -38,8 +38,8 @@ class Album(HistoryMixin, TaggedMixin):
     release_date = models.DateTimeField(blank=True, null=True, db_index=True)
     filename = models.TextField()
 
-    genre = models.ForeignKey("Genre")
-    license = models.ForeignKey("License")
+    genre = models.ForeignKey("Genre", null=True)
+    license = models.ForeignKey("License", null=True)
     artist = models.ForeignKey("Artist")
     track_count = models.IntegerField(default=1)
     duration = models.IntegerField(default=0)
@@ -67,7 +67,8 @@ class Genre(HistoryMixin):
     """
     id3 genres
     """
-    name = models.TextField(unique=True, db_index=True)
+    code = models.TextField(unique=True, db_index=True)
+    name = models.TextField(db_index=True)
     plural_name = models.TextField(blank=True, db_index=True)
 
     def __unicode__(self):
@@ -81,50 +82,49 @@ class Country(HistoryMixin):
         return u"%s" % (self.name, )
 
 class State(HistoryMixin):
-    code = models.TextField(max_length=4, unique=True, db_index=True)
-    name = models.TextField(max_length=100, db_index=True)
+    code = models.TextField(max_length=4, db_index=True, blank=True, null=True)
+    name = models.TextField(max_length=100, db_index=True, blank=True, null=True)
     country = models.ForeignKey("Country", to_field="code", blank=True, null=True, db_index=True)
     
     def __unicode__(self):
         return u"%s (%s)" % (self.name, self.country)
+
+    class Meta:
+        unique_together = (("code", "country"))
     
 class City(HistoryMixin):
     name = models.TextField(max_length=200, db_index=True)
-    state = models.ForeignKey("State", to_field="code", blank=True, null=True, db_index=True)
+    state = models.ForeignKey("State", blank=True, null=True, db_index=True)
 
     def __unicode__(self):
         return u"%s, %s" % (self.name, self.state)
     
 class Artist(HistoryMixin, TaggedMixin):
-    uid = models.IntegerField(primary_key=True, db_index=True)
+    uid = models.IntegerField(unique=True, db_index=True)
     mbgid = models.TextField(max_length=48, blank=True)
     
     name = models.TextField(blank=True, db_index=True)
     image = models.URLField(blank=True, null=True)
     url = models.URLField()
     album_count = models.IntegerField(default=1)
-    genre = models.ForeignKey("Genre")
     
     city = models.ForeignKey("City", blank=True, null=True, db_index=True)
     latitude = models.DecimalField(max_digits=12, decimal_places=10, blank=True, null=True)
     longitude = models.DecimalField(max_digits=13, decimal_places=10, blank=True, default=True)
     
-    class Meta:
-        db_table = u'artists'
-        
     def __unicode__(self):
         return u"%s" % (self.name, )
     
 class TagInfo(HistoryMixin):
-    uid = models.IntegerField(null=True, primary_key=True, blank=True)
-    weight = models.IntegerField(default=1)
+    uid = models.IntegerField(unique=True, null=True, blank=True)
+    weight = models.DecimalField(max_digits=3, decimal_places=2, default=0)
     tag = models.ForeignKey("tagging.Tag")
 
     def __unicode__(self):
         return u"%s (%d)" % (self.tag, self.weight)
     
 class Track(HistoryMixin, TaggedMixin):
-    uid = models.IntegerField(null=True, primary_key=True, blank=True)
+    uid = models.IntegerField(unique=True, null=True, blank=True)
     mbgid = models.TextField(max_length=48, blank=True)
 
     name = models.TextField(blank=True, db_index=True)
@@ -135,17 +135,14 @@ class Track(HistoryMixin, TaggedMixin):
     numalbum = models.IntegerField(default=1)
     
     filename = models.TextField()
-    genre = models.ForeignKey("Genre")
-    license = models.ForeignKey("License")
-
-    class Meta:
-        db_table = u'tracks'
+    genre = models.ForeignKey("Genre", null=True)
+    license = models.ForeignKey("License", null=True)
 
     def __unicode__(self):
         return u"%s - %s (%s)" % (self.name, self.album, self.artist)
 
 class Playlist(HistoryMixin):
-    uid = models.IntegerField(null=True, primary_key=True, blank=True)
+    uid = models.IntegerField(unique=True, null=True, blank=True)
     name = models.TextField(blank=True, db_index=True)
     duration = models.IntegerField(default=0)
 
@@ -157,7 +154,7 @@ class Language(HistoryMixin):
     name = models.TextField(blank=True, db_index=True)
 
 class JamendoUser(HistoryMixin):
-    uid = models.IntegerField(null=True, primary_key=True, blank=True)
+    uid = models.IntegerField(unique=True, null=True, blank=True)
 
     name = models.TextField(blank=True, db_index=True)
     idstr = models.TextField(unique=True, db_index=True)
@@ -168,7 +165,7 @@ class JamendoUser(HistoryMixin):
         return u"%s" % self.name
 
 class Review(HistoryMixin):
-    uid = models.IntegerField(null=True, primary_key=True, blank=True)
+    uid = models.IntegerField(unique=True, null=True, blank=True)
 
     name = models.TextField(blank=True, db_index=True)
     text = models.TextField()
@@ -179,7 +176,7 @@ class Review(HistoryMixin):
         return u"%s (%d)" % (self.name, self.language)
 
 class Radio(HistoryMixin):
-    uid = models.IntegerField(null=True, primary_key=True, blank=True)
+    uid = models.IntegerField(unique=True, null=True, blank=True)
     
     idstr = models.TextField(unique=True, db_index=True)
     name = models.TextField(blank=True, db_index=True)

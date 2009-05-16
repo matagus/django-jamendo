@@ -1,0 +1,19 @@
+{% extends "jamendo/base.html" %}
+{% load i18n pagination_tags %}
+
+{% block head_title %}{% trans 'Licenses List' %}{% endblock %}
+
+{% block body %}
+    {% if queryset %}
+        {% autopaginate queryset 50 %}
+        <ul>
+        {% for license in queryset %}
+            <li>{% include "jamendo/licenses/detail.html" %}</li>
+        {% endfor %}
+        </ul>
+        {% paginate %}
+    {% else %}
+        <p>{% trans 'There are no licenses to show.' %}</p>
+    {% endif %}
+{% endblock %}
+		

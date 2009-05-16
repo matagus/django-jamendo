@@ -4,5 +4,10 @@ TODO - django-jamendo
 * distutils + buildout
 * Make a django command to smartly import (creating or updating data) jamendo db dump.
 * Update models by quering Jamendo webservice.
+* search app
 * Integrate with Pinax. Build a sample project!
+* recommdentions app
+* i18n catalogs
+* RSS / Atom feeds
+
 

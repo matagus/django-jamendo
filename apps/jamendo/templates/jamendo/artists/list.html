@@ -1,0 +1,19 @@
+{% extends "jamendo/base.html" %}
+{% load i18n pagination_tags %}
+
+{% block head_title %}{% trans 'Artists List' %}{% endblock %}
+
+{% block body %}
+    {% if queryset %}
+        {% autopaginate queryset 50 %}
+        <ul>
+        {% for artist in queryset %}
+            <li>{% include "jamendo/artists/detail.html" %}</li>
+        {% endfor %}
+        </ul>
+        {% paginate %}
+    {% else %}
+        <p>{% trans 'There are no artists to show.' %}</p>
+    {% endif %}
+{% endblock %}
+		

@@ -3,13 +3,12 @@
 
 from django.contrib import admin
 
-from jamendo.models import Artist, Album, Track, Tag, TagInfo, License,\
+from jamendo.models import Artist, Album, Track, TagInfo, License,\
     Language, Country, State, City, Playlist, Radio, JamendoUser, Genre, Review
 
 admin.site.register(Artist)
 admin.site.register(Album)
 admin.site.register(Track)
-admin.site.register(Tag)
 admin.site.register(TagInfo)
 admin.site.register(License)
 admin.site.register(Language)

@@ -1,0 +1,10 @@
+{% extends "jamendo/base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+    {{ instance.name }} - {{ block.super }}
+{% endblock %}
+
+{% block body %}
+    <h3>{{ instance }}</h3>
+{% endblock %}

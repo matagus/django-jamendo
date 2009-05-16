@@ -1,0 +1,5 @@
+{% if country.code %}
+    <a title="{{ country.name }}" href="{% url jamendo_country country.code %}">{{ country.name }}</a>
+{% else %}
+    <a title="{{ country.name }}">{{ country.name }}</a>
+{% endif %}
