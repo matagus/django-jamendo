@@ -6,5 +6,58 @@
 {% endblock %}
 
 {% block body %}
-    <h3>{{ instance }}</h3>
+    <h3>{{ instance.name }}</h3>
+    {% if instance.image %}
+        <img src="{{ instance.image }}" title="{{ instance.name }}"/>
+    {% endif %}
+    <ul class="artist detail">
+        {% if instance.mbguid %}
+            <li>
+                <label>{% trans 'Artist page at MusicBrainz' %}:</label>
+                <a href="{% url jamendo_artist_mbguid instance.mbguid %}" title="{% trans 'Artist page at MusicBrainz' %}">
+                    {% trans 'link' %}
+                </a>
+            </li>
+        {% endif %}
+        <li>
+            <label>{% trans 'Page at Jamendo' %}:</label>
+            <a href="{{ instance.url }}" title="{% trans 'Page at Jamendo' %}">
+                {% trans 'link' %}
+            </a>
+        </li>
+        <li>
+            <label>{% trans 'City' %}:</label>
+            {{ instance.city.name }}
+        </li>
+        {% if instance.city.state.name %}
+            <li>
+                <label>{% trans 'State' %}:</label>
+                {{ instance.city.state.name }}
+            </li>
+        {% endif %}
+        {% if instance.city.state.country.pk %}
+        <li>
+            <label>{% trans 'Country' %}:</label>
+            <a href="{% url jamendo_country instance.city.state.country.code %}" title="{{ instance.city.state.country.name }}">
+                {{ instance.city.state.country.name }}
+            </a>
+        </li>
+        {% endif %}
+        <li>
+            <label>{% trans 'Album count' %}:</label>
+            {{ instance.album_count }}
+        </li>
+        {% if instance.album_set.all %}
+        <li>
+            <h4>{% trans "Albums" %}</h4>
+            <ul class="albums list">
+                {% for album in instance.album_set.all %}
+                <li>
+                    <a href="{% url jamendo_album album.pk %}" title="{% trans 'See details of' %} {{ album.name }}">{{ album.name }}</a> ({{ album.release_date.year }})
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+    </ul>
 {% endblock %}

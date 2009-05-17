@@ -1,1 +1,1 @@
-<a title="{{ album.name }}" href="{% url jamendo_album album.pk %}">{{ album.name }}</a>
+<a title="{{ album.name }}" href="{% url jamendo_album album.pk %}">{{ album.name }}</a> - <a title="{{ album.artist.name }}" href="{% url jamendo_artist album.artist.pk %}">{{ album.artist.name }}</a>

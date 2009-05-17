@@ -105,7 +105,7 @@ class AlbumsList(ListView):
         super(AlbumsList, self).__init__(*args, **kwargs)
 
     def get_queryset(self):
-        qs = Album.objects.all().order_by("name")
+        qs = Album.objects.all().select_related("artist").order_by("name")
         return qs
 
     def get_template_paths(self):

@@ -6,5 +6,75 @@
 {% endblock %}
 
 {% block body %}
-    <h3>{{ instance }}</h3>
+    <h3>{{ instance.name }}</h3>
+    {% if instance.image %}
+        <img src="{{ instance.image }}" title="{{ instance.name }}"/>
+    {% endif %}
+    <ul class="album detail">
+        <li>
+            <label>{% trans 'Artist' %}:</label>
+            <a href="{% url jamendo_artist instance.artist.pk %}" title="{{ instance.artist.name }}">
+                {{ instance.artist.name }}
+            </a>
+        </li>
+        {% if instance.mbguid %}
+            <li>
+                <label>{% trans 'Album page at MusicBrainz' %}:</label>
+                <a href="{% url jamendo_album_mbguid instance.mbguid %}" title="{% trans 'Album page at MusicBrainz' %}">
+                    {% trans 'link' %}
+                </a>
+            </li>
+        {% endif %}
+        <li>
+            <label>{% trans 'Page at Jamendo' %}:</label>
+            <a href="{{ instance.url }}" title="{% trans 'Page at Jamendo' %}">
+                {% trans 'link' %}
+            </a>
+        </li>
+        <li>
+            <label>{% trans 'Release Date' %}:</label>
+            {{ instance.release_date.year }}
+        </li>
+        <li>
+            <label>{% trans 'Filename' %}:</label>
+            {{ instance.filename }}
+        </li>
+        {% if instance.genre %}
+            <li>
+                <label>{% trans 'Genre' %}:</label>
+                {{ instance.genre.name }}
+            </li>
+        {% endif %}
+        <li>
+            <label>{% trans 'License' %}:</label>
+            <a href="{% url jamendo_license instance.license.pk %}" title="{{ instance.license.name }}">
+                {{ instance.license.name }}
+            </a>
+        </li>
+        <li>
+            <label>{% trans 'Track count' %}:</label>
+            {{ instance.track_count }}
+        </li>
+        {% if instance.track_set.all %}
+        <li>
+            <h4>{% trans "Tracks" %}</h4>
+            <ul class="tracks list">
+                {% for track in instance.track_set.all %}
+                <li>
+                    <a href="{# url jamendo_track track.pk #}" title="{% trans 'See details of' %} {{ track.name }}">{{ track.name }}</a> ({{ track.get_human_duration }})
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+        {% for tag in instance.get_tags %}
+            {% if forloop.first %}
+                <li><label>{% trans 'Tags' %}:</label></li>
+            {% endif %}
+            <li>
+                <a href="{% url jamendo_tag tag.name %}" title="{{ tag.name }}">{{ tag.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

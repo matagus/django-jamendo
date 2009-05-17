@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
+
 from tagging.models import Tag
 
 class HistoryMixin(models.Model):
@@ -53,6 +55,15 @@ class Album(HistoryMixin, TaggedMixin):
 
     def __unicode__(self):
         return u"%s - %s" % (self.name, self.artist)
+
+    def get_tags(self):
+        track_ids = self.track_set.values_list("pk", flat=True)
+        content_type = ContentType.objects.get_for_model(Track)
+        tags = Tag.objects.filter(
+                items__content_type=content_type,
+                items__object_id__in=track_ids
+            ).distinct()
+        return tags
 
 class License(HistoryMixin):
     uid = models.IntegerField(unique=True, db_index=True)
@@ -141,6 +152,9 @@ class Track(HistoryMixin, TaggedMixin):
     def __unicode__(self):
         return u"%s - %s (%s)" % (self.name, self.album, self.artist)
 
+    def get_human_duration(self):
+        return u"%d:%.2d" % (self.duration / 60, self.duration % 60)
+    
 class Playlist(HistoryMixin):
     uid = models.IntegerField(unique=True, null=True, blank=True)
     name = models.TextField(blank=True, db_index=True)
