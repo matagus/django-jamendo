@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-17 06:16-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/site_base.html:4 templates/site_base.html.py:8
+msgid "jamendo browser"
+msgstr ""
+
+#: templates/site_base.html:7
+msgid "django powered"
+msgstr ""
+
+#: templates/site_base.html:17
+msgid "Home"
+msgstr ""
+
+#: templates/jamendo/base.html:10
+msgid "Explore the list of artists"
+msgstr ""
+
+#: templates/jamendo/base.html:10
+msgid "Artists"
+msgstr ""
+
+#: templates/jamendo/base.html:13
+msgid "Browse the list of albums"
+msgstr ""
+
+#: templates/jamendo/base.html:13 templates/jamendo/artists/show.html:52
+msgid "Albums"
+msgstr ""
+
+#: templates/jamendo/base.html:16
+msgid "Explore the tags cloud"
+msgstr ""
+
+#: templates/jamendo/base.html:16 templates/jamendo/albums/show.html:72
+msgid "Tags"
+msgstr ""
+
+#: templates/jamendo/base.html:19
+msgid "Browse the list of artists by country"
+msgstr ""
+
+#: templates/jamendo/base.html:19
+msgid "By country"
+msgstr ""
+
+#: templates/jamendo/base.html:22
+msgid "Browse the list of albums by license"
+msgstr ""
+
+#: templates/jamendo/base.html:22
+msgid "By license"
+msgstr ""
+
+#: templates/jamendo/albums/list.html:4 templates/jamendo/tracks/list.html:4
+msgid "Albums List"
+msgstr ""
+
+#: templates/jamendo/albums/list.html:16 templates/jamendo/tracks/list.html:16
+msgid "There are no albums to show."
+msgstr ""
+
+#: templates/jamendo/albums/show.html:15
+msgid "Artist"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:22 templates/jamendo/albums/show.html:23
+msgid "Album page at MusicBrainz"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:24 templates/jamendo/albums/show.html:31
+#: templates/jamendo/artists/show.html:18
+#: templates/jamendo/artists/show.html:25
+msgid "link"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:29 templates/jamendo/albums/show.html:30
+#: templates/jamendo/artists/show.html:23
+#: templates/jamendo/artists/show.html:24
+msgid "Page at Jamendo"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:35
+msgid "Release Date"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:39
+msgid "Filename"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:44
+msgid "Genre"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:49
+msgid "License"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:55
+msgid "Track count"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:60
+msgid "Tracks"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:64
+#: templates/jamendo/artists/show.html:56
+msgid "See details of"
+msgstr ""
+
+#: templates/jamendo/artists/list.html:4
+msgid "Artists List"
+msgstr ""
+
+#: templates/jamendo/artists/list.html:16
+msgid "There are no artists to show."
+msgstr ""
+
+#: templates/jamendo/artists/show.html:16
+#: templates/jamendo/artists/show.html:17
+msgid "Artist page at MusicBrainz"
+msgstr ""
+
+#: templates/jamendo/artists/show.html:29
+msgid "City"
+msgstr ""
+
+#: templates/jamendo/artists/show.html:34
+msgid "State"
+msgstr ""
+
+#: templates/jamendo/artists/show.html:40
+msgid "Country"
+msgstr ""
+
+#: templates/jamendo/artists/show.html:47
+msgid "Album count"
+msgstr ""
+
+#: templates/jamendo/countries/list.html:4
+msgid "Countries List"
+msgstr ""
+
+#: templates/jamendo/countries/list.html:16
+msgid "There are no countries to show."
+msgstr ""
+
+#: templates/jamendo/licenses/list.html:4
+msgid "Licenses List"
+msgstr ""
+
+#: templates/jamendo/licenses/list.html:16
+msgid "There are no licenses to show."
+msgstr ""
+
+#: templates/jamendo/tags/cloud.html:4
+msgid "Tags Cloud"
+msgstr ""
+
+#: templates/jamendo/tags/cloud.html:16 templates/jamendo/tags/list.html:16
+msgid "There are no tags to show."
+msgstr ""
+
+#: templates/jamendo/tags/list.html:4
+msgid "Tags List"
+msgstr ""
