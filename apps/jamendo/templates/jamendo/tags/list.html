@@ -5,8 +5,8 @@
 
 {% block body %}
     {% if queryset %}
-        {% autopaginate queryset 50 %}
-        <ul>
+        {% autopaginate queryset 200 %}
+        <ul class="tags list">
         {% for tag in queryset %}
             <li>{% include "jamendo/tags/detail.html" %}</li>
         {% endfor %}

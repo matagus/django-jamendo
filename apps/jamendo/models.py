@@ -86,9 +86,12 @@ class Genre(HistoryMixin):
         return u"%s" % (self.name, )
 
 class Country(HistoryMixin):
+    # ISO3 code
     code = models.TextField(max_length=4, unique=True, db_index=True)
+    numcode = models.IntegerField(unique=True, db_index=True)
     name = models.TextField(max_length=100, db_index=True)
-
+    printable_name = models.TextField(max_length=100)
+    
     def __unicode__(self):
         return u"%s" % (self.name, )
 
@@ -125,7 +128,7 @@ class Artist(HistoryMixin, TaggedMixin):
     
     def __unicode__(self):
         return u"%s" % (self.name, )
-    
+
 class TagInfo(HistoryMixin):
     uid = models.IntegerField(unique=True, null=True, blank=True)
     weight = models.DecimalField(max_digits=3, decimal_places=2, default=0)

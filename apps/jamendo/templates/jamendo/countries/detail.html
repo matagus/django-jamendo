@@ -1,5 +1,5 @@
 {% if country.code %}
-    <a title="{{ country.name }}" href="{% url jamendo_country country.code %}">{{ country.name }}</a>
+    <a title="{{ country.printable_name }}" href="{% url jamendo_country country.code %}">{{ country.printable_name }}</a>
 {% else %}
-    <a title="{{ country.name }}">{{ country.name }}</a>
+    <a title="{{ country.printable_name }}">{{ country.printable_name }}</a>
 {% endif %}

@@ -1,10 +1,17 @@
 {% extends "jamendo/base.html" %}
-{% load i18n %}
+{% load i18n pagination_tags %}
 
 {% block head_title %}
     {{ instance.name }} - {{ block.super }}
 {% endblock %}
 
 {% block body %}
-    <h3>{{ instance }}</h3>
+    <h3>{% trans 'Artists tagged' %} {{ instance.name }}</h3>
+    {% autopaginate artists 50 %}
+    <ul>
+    {% for artist in artists %}
+        <li>{% include "jamendo/artists/detail.html" %}</li>
+    {% endfor %}
+    </ul>
+    {% paginate %}
 {% endblock %}

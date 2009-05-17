@@ -7,9 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
 
-from tagging.models import Tag
+from tagging.models import Tag, TaggedItem
 
-from jamendo.models import Artist, Album, License, Country
+from jamendo.models import Artist, Album, License, Country, Track
 
 class BaseView(object):
     """
@@ -127,7 +127,9 @@ class TagsCloud(ListView):
         super(TagsCloud, self).__init__(*args, **kwargs)
 
     def get_queryset(self):
-        qs = Tag.objects.all()
+        # this qs will return a QuerySet of dict items like this:
+        # {'count': 21, 'font_size': 2, 'id': 2262, 'name': u'0'}
+        qs = Tag.objects.cloud_for_model(Track)
         return qs
 
     def get_template_paths(self):
@@ -146,8 +148,13 @@ class TagShow(ShowView):
     def GET(self, request, tag, *args, **kwargs):
         params_dict = self.get_params_dict()
 
-        instance = get_object_or_404(Tag, name=tag)
-        params_dict.update({"instance": instance})
+        self.instance = get_object_or_404(Tag, name=tag)
+
+        track_ids = TaggedItem.objects.get_by_model(Track, (self.instance, )).values_list("pk", flat=True)
+        artists_qs = Artist.objects.filter(
+                album__track__in=track_ids
+            ).distinct().order_by("name")
+        params_dict.update({"instance": self.instance, "artists": artists_qs})
 
         return render_to_response(self.get_template_paths(), params_dict,
             context_instance=RequestContext(request))
@@ -174,15 +181,23 @@ class CountryShow(ShowView):
         templates_list = ("jamendo/countries/show.html", )
         return templates_list
 
+    def get_params_dict(self):
+        artists_qs = Artist.objects.filter(
+                city__state__country=self.instance.code
+            ).distinct().order_by("name")
+        return {"artists": artists_qs}
+
     def GET(self, request, code=None, juid=None, *args, **kwargs):
-        params_dict = self.get_params_dict()
         if code:
-            instance = get_object_or_404(self.model, code=code)
+            self.instance = get_object_or_404(self.model, code=code)
         elif juid:
-            instance = get_object_or_404(self.model, uid=juid)
+            self.instance = get_object_or_404(self.model, uid=juid)
         else:
             return HttpResponseBadRequest()
-        params_dict.update({"instance": instance})
+        
+        params_dict = self.get_params_dict()
+        
+        params_dict.update({"instance": self.instance})
 
         return render_to_response(self.get_template_paths(), params_dict,
             context_instance=RequestContext(request))
@@ -209,3 +224,17 @@ class LicenseShow(ShowView):
         templates_list = ("jamendo/licenses/show.html", )
         return templates_list
 
+    def GET(self, request, pk=None, juid=None, *args, **kwargs):
+        if pk:
+            self.instance = get_object_or_404(self.model, pk=pk)
+        elif juid:
+            self.instance = get_object_or_404(self.model, uid=juid)
+        else:
+            return HttpResponseBadRequest()
+        
+        params_dict = self.get_params_dict()
+        
+        params_dict.update({"instance": self.instance, "albums": self.instance.album_set.all()})
+
+        return render_to_response(self.get_template_paths(), params_dict,
+            context_instance=RequestContext(request))

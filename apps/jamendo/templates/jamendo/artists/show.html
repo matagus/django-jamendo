@@ -38,8 +38,8 @@
         {% if instance.city.state.country.pk %}
         <li>
             <label>{% trans 'Country' %}:</label>
-            <a href="{% url jamendo_country instance.city.state.country.code %}" title="{{ instance.city.state.country.name }}">
-                {{ instance.city.state.country.name }}
+            <a href="{% url jamendo_country instance.city.state.country.code %}" title="{{ instance.city.state.country.printable_name }}">
+                {{ instance.city.state.country.printable_name }}
             </a>
         </li>
         {% endif %}

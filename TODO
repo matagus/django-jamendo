@@ -6,8 +6,8 @@ TODO - django-jamendo
 * Update models by quering Jamendo webservice.
 * search app
 * Integrate with Pinax. Build a sample project!
-* recommdentions app
-* i18n catalogs
+* spanish (es) translation
 * RSS / Atom feeds
+* favicon + logo
 
 
