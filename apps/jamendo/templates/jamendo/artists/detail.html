@@ -1,1 +1,15 @@
+{% load i18n %}
+<a title='{{ artist.name }}' href="{% url jamendo_artist artist.pk %}">
+    <img class="image small" src="{{ MEDIA_URL }}artists/50x50/{{ artist.uid }}.jpg" title="{{ artist.name }}" />
+</a>
 <a title="{{ artist.name }}" href="{% url jamendo_artist artist.pk %}">{{ artist.name }}</a>
+<div class="detail listen">
+    <p>({{ artist.album_count }} {% trans 'album/s' %})</p>
+    {% trans 'Listen' %}: 
+    <a href="{{ artist.get_ogg_m3u }}" title="{% trans 'Listen in OGG format' %}">
+        {% trans 'ogg' %}
+    </a> 
+    <a href="{{ artist.get_mp3_m3u }}" title="{% trans 'Listen in MP3 format' %}">
+        {% trans 'mp3' %}
+    </a>
+</div>

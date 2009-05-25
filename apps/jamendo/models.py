@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import urllib
+
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
@@ -49,7 +51,7 @@ class Album(HistoryMixin, TaggedMixin):
     class Meta:
         #db_table = u'albums'
         #order_with_respect_to = ""
-        ordering = ["name"]
+        ordering = ["name", "release_date"]
         verbose_name = "album"
         verbose_name_plural = "albums"
 
@@ -65,6 +67,15 @@ class Album(HistoryMixin, TaggedMixin):
             ).distinct()
         return tags
 
+    def get_mp3_url(self):
+        return "http://api.jamendo.com/get2/stream/album/m3u/?id=%d&streamencoding=mp31" % self.uid
+    
+    def get_ogg_url(self):
+        return "http://api.jamendo.com/get2/stream/album/m3u/?id=%d&streamencoding=ogg2" % self.uid
+
+    def get_human_duration(self):
+        return u"%d:%.2d" % (self.duration / 60, self.duration % 60)
+    
 class License(HistoryMixin):
     uid = models.IntegerField(unique=True, db_index=True)
     license_class = models.TextField(db_index=True)
@@ -129,14 +140,21 @@ class Artist(HistoryMixin, TaggedMixin):
     def __unicode__(self):
         return u"%s" % (self.name, )
 
-class TagInfo(HistoryMixin):
-    uid = models.IntegerField(unique=True, null=True, blank=True)
-    weight = models.DecimalField(max_digits=3, decimal_places=2, default=0)
-    tag = models.ForeignKey("tagging.Tag")
+    def get_quoted_name(self):
+        return urllib.quote(self.name)
 
-    def __unicode__(self):
-        return u"%s (%d)" % (self.tag, self.weight)
-    
+    def get_mp3_m3u(self):
+        url_tpl = "http://api.jamendo.com/get2/stream/album/m3u/?id=%s&streamencoding=mp31"
+        album_ids = map(str, list(self.album_set.values_list("uid", flat=True)))
+        album_ids_str = "+".join(album_ids)
+        return url_tpl % album_ids_str
+
+    def get_ogg_m3u(self):
+        url_tpl = "http://api.jamendo.com/get2/stream/album/m3u/?id=%s&streamencoding=ogg2"
+        album_ids = map(str, list(self.album_set.values_list("uid", flat=True)))
+        album_ids_str = "+".join(album_ids)
+        return url_tpl % album_ids_str
+
 class Track(HistoryMixin, TaggedMixin):
     uid = models.IntegerField(unique=True, null=True, blank=True)
     mbgid = models.TextField(max_length=48, blank=True)
@@ -157,6 +175,12 @@ class Track(HistoryMixin, TaggedMixin):
 
     def get_human_duration(self):
         return u"%d:%.2d" % (self.duration / 60, self.duration % 60)
+
+    def get_mp3_url(self):
+        return "http://api.jamendo.com/get2/stream/track/m3u/?id=%d&streamencoding=mp31" % self.uid
+    
+    def get_ogg_url(self):
+        return "http://api.jamendo.com/get2/stream/track/m3u/?id=%d&streamencoding=ogg2" % self.uid
     
 class Playlist(HistoryMixin):
     uid = models.IntegerField(unique=True, null=True, blank=True)

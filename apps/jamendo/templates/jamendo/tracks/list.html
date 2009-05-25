@@ -1,11 +1,13 @@
 {% extends "jamendo/base.html" %}
 {% load i18n pagination_tags %}
 
-{% block head_title %}{% trans 'Albums List' %}{% endblock %}
+{% block head_title %}
+    {% trans 'Albums List' %} - {{ block.super }}
+{% endblock %}
 
 {% block body %}
     {% if queryset %}
-        {% autopaginate queryset 50 %}
+        {% autopaginate queryset ITEMS_PER_PAGE %}
         <ul>
         {% for album in queryset %}
             <li>{% include "jamendo/albums/detail.html" %}</li>

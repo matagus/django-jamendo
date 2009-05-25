@@ -1,11 +1,15 @@
 {% extends "jamendo/base.html" %}
 {% load i18n pagination_tags %}
 
-{% block head_title %}{% trans 'Tags List' %}{% endblock %}
+{% block head_title %}
+    {% trans 'Tags List' %} - {{ block.super }}
+{% endblock %}
+
+{% block subnav_active %}tags{% endblock %}
 
 {% block body %}
     {% if queryset %}
-        {% autopaginate queryset 200 %}
+        {% autopaginate queryset TAGS_PER_PAGE %}
         <ul class="tags list">
         {% for tag in queryset %}
             <li>{% include "jamendo/tags/detail.html" %}</li>

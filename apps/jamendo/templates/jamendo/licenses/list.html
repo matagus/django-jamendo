@@ -1,11 +1,25 @@
 {% extends "jamendo/base.html" %}
 {% load i18n pagination_tags %}
 
-{% block head_title %}{% trans 'Licenses List' %}{% endblock %}
+{% block head_title %}
+    {% trans 'Licenses List' %}
+{% endblock %}
+
+{% block title %}<h2>{% trans 'License List' %}</h2>{% endblock %}
+
+{% block subnav_active %}licenses{% endblock %}
 
 {% block body %}
+    <form method="GET" action=".">
+        <ul class="form">
+            {{ form.as_ul }}
+            <li>
+                <input name="search" id="search" type="submit" value="{% trans 'go' %}" />
+            </li>
+        </ul>
+    </form>
     {% if queryset %}
-        {% autopaginate queryset 50 %}
+        {% autopaginate queryset ITEMS_PER_PAGE %}
         <ul>
         {% for license in queryset %}
             <li>{% include "jamendo/licenses/detail.html" %}</li>

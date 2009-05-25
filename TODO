@@ -1,13 +1,24 @@
 TODO - django-jamendo
 =====================
 
-* distutils + buildout
+* buildout
+* setup.py
+* pypi
 * Make a django command to smartly import (creating or updating data) jamendo db dump.
 * Update models by quering Jamendo webservice.
-* search app
 * Integrate with Pinax. Build a sample project!
 * spanish (es) translation
 * RSS / Atom feeds
 * favicon + logo
+
+Some IDEAS:
++ Allow users tag artists, albums and tracks
++ Store and use tag.weight provided by Jamendo
++ Allow users create, store, maybe share playlists
++ Collaborative playlists
++ Suggest me feature
++ Similar artists feature
++ voting artists, albums, tracks
+
 
 

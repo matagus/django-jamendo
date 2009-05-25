@@ -5,6 +5,8 @@
     {{ instance.name }} - {{ block.super }}
 {% endblock %}
 
+{% block title %}{% endblock %}
+
 {% block body %}
     <h3>{{ instance.name }}</h3>
     <ul>
@@ -16,8 +18,8 @@
         </li>
     </ul>
     <h4>{% trans 'Albums under this license' %}</h4>
-    {% autopaginate albums 50 %}
-    <ul>
+    {% autopaginate albums ITEMS_PER_PAGE %}
+    <ul class="album list">
     {% for album in albums %}
         <li>{% include "jamendo/albums/detail.html" %}</li>
     {% endfor %}

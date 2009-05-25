@@ -5,11 +5,22 @@
     {{ instance.name }} - {{ block.super }}
 {% endblock %}
 
+{% block title %}{% endblock %}
+
 {% block body %}
     <h3>{{ instance.name }}</h3>
     {% if instance.image %}
-        <img src="{{ instance.image }}" title="{{ instance.name }}"/>
+        <img src="{{ MEDIA_URL }}artists/{{ instance.uid }}.jpg" title="{{ instance.name }}"/>
     {% endif %}
+    <div class="album player">
+        {% trans 'Listen' %}
+        <a href="{{ instance.get_ogg_m3u }}" title="{% trans 'Listen in OGG format' %}">
+            {% trans 'OGG stream' %}
+        </a>
+        <a href="{{ instance.get_mp3_m3u }}" title="{% trans 'Listen in MP3 format' %}">
+            {% trans 'MP3 stream' %}
+        </a>
+    </div>
     <ul class="artist detail">
         {% if instance.mbguid %}
             <li>
@@ -25,14 +36,10 @@
                 {% trans 'link' %}
             </a>
         </li>
-        <li>
-            <label>{% trans 'City' %}:</label>
-            {{ instance.city.name }}
-        </li>
-        {% if instance.city.state.name %}
+        {% if instance.city.name %}
             <li>
-                <label>{% trans 'State' %}:</label>
-                {{ instance.city.state.name }}
+                <label>{% trans 'City' %}:</label>
+                {{ instance.city.name }}
             </li>
         {% endif %}
         {% if instance.city.state.country.pk %}
@@ -43,18 +50,30 @@
             </a>
         </li>
         {% endif %}
-        <li>
-            <label>{% trans 'Album count' %}:</label>
-            {{ instance.album_count }}
-        </li>
         {% if instance.album_set.all %}
         <li>
             <h4>{% trans "Albums" %}</h4>
-            <ul class="albums list">
-                {% for album in instance.album_set.all %}
+            <ul class="album list">
+                {% for album in albums_list %}
                 <li>
-                    <a href="{% url jamendo_album album.pk %}" title="{% trans 'See details of' %} {{ album.name }}">{{ album.name }}</a> ({{ album.release_date.year }})
+                    {% include "jamendo/albums/detail_noartist.html" %}
                 </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+        <li>
+            <label>{% trans 'Total' %}:</label>
+            {{ instance.album_count }}
+        </li>
+        {% if instance.tags %}
+        <li>
+            <h4>{% trans "Tags" %}</h4>
+            <ul class="tags list">
+                {% for tag in instance.tags.all %}
+                    <li>
+                        <a href="{% url jamendo_tag tag.name %}" title="{{ tag.name }}">{{ tag.name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </li>

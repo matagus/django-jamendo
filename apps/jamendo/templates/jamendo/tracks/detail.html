@@ -1,1 +1,5 @@
-<a title="{{ album.name }}" href="{% url jamendo_album album.pk %}">{{ album.name }}</a>
+{% load i18n %}
+<span>{{ track.name }}</span> <span class="detail">({{ track.get_human_duration }})</span>
+<div class="listen">
+    {% trans 'Listen' %}: <a href="{{ track.get_ogg_url }}" title="{% trans 'Listen in OGG format' %}">{% trans 'ogg' %}</a> <a href="{{ track.get_mp3_url }}" title="{% trans 'Listen in MP3 format' %}">{% trans 'mp3' %}</a>
+</div>

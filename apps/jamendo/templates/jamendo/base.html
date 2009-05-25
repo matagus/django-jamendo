@@ -5,20 +5,20 @@
 {% block rtab_id %}id="jamendos_tab"{% endblock %}
 
 {% block subnav %}
-    <ul>
-        <li>
+    <ul class="{% block subnav_active %}{% endblock %}">
+        <li id="artists">
             <a href="{% url jamendo_artists %}" title="{% trans 'Explore the list of artists' %}">{% trans "Artists" %}</a>
         </li>
-        <li>
+        <li id="albums">
             <a href="{% url jamendo_albums %}" title="{% trans 'Browse the list of albums' %}">{% trans "Albums" %}</a>
         </li>
-        <li>
+        <li id="tags">
             <a href="{% url jamendo_tagscloud %}" title="{% trans 'Explore the tags cloud' %}">{% trans "Tags" %}</a>
         </li>
-        <li>
+        <li id="countries">
             <a href="{% url jamendo_countries %}" title="{% trans 'Browse the list of artists by country' %}">{% trans "By country" %}</a>
         </li>
-        <li>
+        <li id="licenses">
             <a href="{% url jamendo_licenses %}" title="{% trans 'Browse the list of albums by license' %}">{% trans "By license" %}</a>
         </li>
     </ul>

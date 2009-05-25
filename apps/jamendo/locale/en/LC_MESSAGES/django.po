@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-17 06:16-0300\n"
+"POT-Creation-Date: 2009-05-25 15:49-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: templates/site_base.html:4 templates/site_base.html.py:8
+#: forms.py:9
+msgid "Search by name"
+msgstr ""
+
+#: templates/site_base.html:4 templates/site_base.html.py:9
 msgid "jamendo browser"
 msgstr ""
 
-#: templates/site_base.html:7
+#: templates/site_base.html:8
 msgid "django powered"
 msgstr ""
 
-#: templates/site_base.html:17
+#: templates/site_base.html:18
 msgid "Home"
 msgstr ""
 
@@ -40,7 +44,7 @@ msgstr ""
 msgid "Browse the list of albums"
 msgstr ""
 
-#: templates/jamendo/base.html:13 templates/jamendo/artists/show.html:52
+#: templates/jamendo/base.html:13 templates/jamendo/artists/show.html:55
 msgid "Albums"
 msgstr ""
 
@@ -48,7 +52,8 @@ msgstr ""
 msgid "Explore the tags cloud"
 msgstr ""
 
-#: templates/jamendo/base.html:16 templates/jamendo/albums/show.html:72
+#: templates/jamendo/base.html:16 templates/jamendo/albums/show.html:75
+#: templates/jamendo/artists/show.html:71
 msgid "Tags"
 msgstr ""
 
@@ -68,116 +73,200 @@ msgstr ""
 msgid "By license"
 msgstr ""
 
-#: templates/jamendo/albums/list.html:4 templates/jamendo/tracks/list.html:4
+#: templates/jamendo/albums/detail.html:11
+#: templates/jamendo/albums/show.html:11
+msgid "by"
+msgstr ""
+
+#: templates/jamendo/albums/detail.html:16
+#: templates/jamendo/albums/detail_noartist.html:10
+#: templates/jamendo/albums/show.html:18
+#: templates/jamendo/artists/detail.html:8
+#: templates/jamendo/artists/show.html:16
+#: templates/jamendo/tracks/detail.html:4
+msgid "Listen"
+msgstr ""
+
+#: templates/jamendo/albums/detail.html:16
+#: templates/jamendo/albums/detail_noartist.html:10
+#: templates/jamendo/albums/show.html:19
+#: templates/jamendo/artists/detail.html:9
+#: templates/jamendo/artists/show.html:17
+#: templates/jamendo/tracks/detail.html:4
+msgid "Listen in OGG format"
+msgstr ""
+
+#: templates/jamendo/albums/detail.html:16
+#: templates/jamendo/albums/detail_noartist.html:10
+#: templates/jamendo/artists/detail.html:10
+#: templates/jamendo/tracks/detail.html:4
+msgid "ogg"
+msgstr ""
+
+#: templates/jamendo/albums/detail.html:16
+#: templates/jamendo/albums/detail_noartist.html:10
+#: templates/jamendo/albums/show.html:22
+#: templates/jamendo/artists/detail.html:12
+#: templates/jamendo/artists/show.html:20
+#: templates/jamendo/tracks/detail.html:4
+msgid "Listen in MP3 format"
+msgstr ""
+
+#: templates/jamendo/albums/detail.html:16
+#: templates/jamendo/albums/detail_noartist.html:10
+#: templates/jamendo/artists/detail.html:13
+#: templates/jamendo/tracks/detail.html:4
+msgid "mp3"
+msgstr ""
+
+#: templates/jamendo/albums/list.html:5 templates/jamendo/tracks/list.html:5
 msgid "Albums List"
 msgstr ""
 
-#: templates/jamendo/albums/list.html:16 templates/jamendo/tracks/list.html:16
+#: templates/jamendo/albums/list.html:8
+msgid "Album List"
+msgstr ""
+
+#: templates/jamendo/albums/list.html:17
+#: templates/jamendo/artists/list.html:17
+#: templates/jamendo/countries/list.html:17
+#: templates/jamendo/licenses/list.html:17
+msgid "go"
+msgstr ""
+
+#: templates/jamendo/albums/list.html:30 templates/jamendo/tracks/list.html:18
 msgid "There are no albums to show."
 msgstr ""
 
-#: templates/jamendo/albums/show.html:15
-msgid "Artist"
+#: templates/jamendo/albums/show.html:20
+#: templates/jamendo/artists/show.html:18
+msgid "OGG stream"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:22 templates/jamendo/albums/show.html:23
+#: templates/jamendo/albums/show.html:23
+#: templates/jamendo/artists/show.html:21
+msgid "MP3 stream"
+msgstr ""
+
+#: templates/jamendo/albums/show.html:30 templates/jamendo/albums/show.html:31
 msgid "Album page at MusicBrainz"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:24 templates/jamendo/albums/show.html:31
-#: templates/jamendo/artists/show.html:18
-#: templates/jamendo/artists/show.html:25
+#: templates/jamendo/albums/show.html:32 templates/jamendo/albums/show.html:39
+#: templates/jamendo/artists/show.html:29
+#: templates/jamendo/artists/show.html:36
+#: templates/jamendo/licenses/show.html:16
 msgid "link"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:29 templates/jamendo/albums/show.html:30
-#: templates/jamendo/artists/show.html:23
-#: templates/jamendo/artists/show.html:24
+#: templates/jamendo/albums/show.html:37 templates/jamendo/albums/show.html:38
+#: templates/jamendo/artists/show.html:34
+#: templates/jamendo/artists/show.html:35
 msgid "Page at Jamendo"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:35
+#: templates/jamendo/albums/show.html:43
 msgid "Release Date"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:39
-msgid "Filename"
-msgstr ""
-
-#: templates/jamendo/albums/show.html:44
+#: templates/jamendo/albums/show.html:48
 msgid "Genre"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:49
+#: templates/jamendo/albums/show.html:53
 msgid "License"
-msgstr ""
-
-#: templates/jamendo/albums/show.html:55
-msgid "Track count"
 msgstr ""
 
 #: templates/jamendo/albums/show.html:60
 msgid "Tracks"
 msgstr ""
 
-#: templates/jamendo/albums/show.html:64
-#: templates/jamendo/artists/show.html:56
-msgid "See details of"
+#: templates/jamendo/albums/show.html:71
+#: templates/jamendo/artists/show.html:66
+msgid "Total"
 msgstr ""
 
-#: templates/jamendo/artists/list.html:4
+#: templates/jamendo/artists/detail.html:7
+msgid "album/s"
+msgstr ""
+
+#: templates/jamendo/artists/list.html:5
 msgid "Artists List"
 msgstr ""
 
-#: templates/jamendo/artists/list.html:16
+#: templates/jamendo/artists/list.html:8
+msgid "Artist List"
+msgstr ""
+
+#: templates/jamendo/artists/list.html:30
 msgid "There are no artists to show."
 msgstr ""
 
-#: templates/jamendo/artists/show.html:16
-#: templates/jamendo/artists/show.html:17
+#: templates/jamendo/artists/show.html:27
+#: templates/jamendo/artists/show.html:28
 msgid "Artist page at MusicBrainz"
 msgstr ""
 
-#: templates/jamendo/artists/show.html:29
+#: templates/jamendo/artists/show.html:41
 msgid "City"
 msgstr ""
 
-#: templates/jamendo/artists/show.html:34
-msgid "State"
-msgstr ""
-
-#: templates/jamendo/artists/show.html:40
+#: templates/jamendo/artists/show.html:47
 msgid "Country"
 msgstr ""
 
-#: templates/jamendo/artists/show.html:47
-msgid "Album count"
-msgstr ""
-
-#: templates/jamendo/countries/list.html:4
+#: templates/jamendo/countries/list.html:5
 msgid "Countries List"
 msgstr ""
 
-#: templates/jamendo/countries/list.html:16
+#: templates/jamendo/countries/list.html:8
+msgid "Country List"
+msgstr ""
+
+#: templates/jamendo/countries/list.html:30
 msgid "There are no countries to show."
 msgstr ""
 
-#: templates/jamendo/licenses/list.html:4
+#: templates/jamendo/countries/show.html:11
+msgid "Artists belonging to"
+msgstr ""
+
+#: templates/jamendo/licenses/list.html:5
 msgid "Licenses List"
 msgstr ""
 
-#: templates/jamendo/licenses/list.html:16
+#: templates/jamendo/licenses/list.html:8
+msgid "License List"
+msgstr ""
+
+#: templates/jamendo/licenses/list.html:30
 msgid "There are no licenses to show."
 msgstr ""
 
-#: templates/jamendo/tags/cloud.html:4
+#: templates/jamendo/licenses/show.html:14
+msgid "Web"
+msgstr ""
+
+#: templates/jamendo/licenses/show.html:15
+msgid "View more about"
+msgstr ""
+
+#: templates/jamendo/licenses/show.html:20
+msgid "Albums under this license"
+msgstr ""
+
+#: templates/jamendo/tags/cloud.html:5 templates/jamendo/tags/cloud.html:8
 msgid "Tags Cloud"
 msgstr ""
 
-#: templates/jamendo/tags/cloud.html:16 templates/jamendo/tags/list.html:16
+#: templates/jamendo/tags/cloud.html:22 templates/jamendo/tags/list.html:20
 msgid "There are no tags to show."
 msgstr ""
 
-#: templates/jamendo/tags/list.html:4
+#: templates/jamendo/tags/list.html:5
 msgid "Tags List"
+msgstr ""
+
+#: templates/jamendo/tags/show.html:11
+msgid "Artists tagged"
 msgstr ""

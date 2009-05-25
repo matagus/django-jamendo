@@ -1,11 +1,17 @@
 {% extends "jamendo/base.html" %}
 {% load i18n pagination_tags %}
 
-{% block head_title %}{% trans 'Tags Cloud' %}{% endblock %}
+{% block head_title %}
+    {% trans 'Tags Cloud' %}
+{% endblock %}
+
+{% block title %}<h2>{% trans 'Tags Cloud' %}</h2>{% endblock %}
+
+{% block subnav_active %}tags{% endblock %}
 
 {% block body %}
     {% if queryset %}
-        {% autopaginate queryset 200 %}
+        {% autopaginate queryset TAGS_PER_PAGE %}
         <ul class="tags cloud" style="list-style-type: none;">
         {% for tag in queryset %}
             <li style="display: inline;">{% include "jamendo/tags/detail.html" %}</li>

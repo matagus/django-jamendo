@@ -2,20 +2,21 @@
 <html>
     <head>
         <title>{% block head_title %}{% trans "jamendo browser" %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/base.css?p=" />
     </head>
     <body>
         <span>{% trans 'django powered' %}</span>
         <h1>{% trans "jamendo browser" %}</h1>
         <div id="{% block rtab_id %}{% endblock %}">
         </div>
-
         <div id="subnav">
         {% block subnav %}
         {% endblock %}
         </div>
-
-        <h2>{% block title %} {% trans "Home" %} {% endblock %}</h2>
         <div id="body">
+        {% block title %}
+            <h2>{% trans "Home" %}</h2>
+        {% endblock %}
         {% block body %}
         {% endblock %}
         </div>

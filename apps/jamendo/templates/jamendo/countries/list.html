@@ -1,11 +1,25 @@
 {% extends "jamendo/base.html" %}
 {% load i18n pagination_tags %}
 
-{% block head_title %}{% trans 'Countries List' %}{% endblock %}
+{% block head_title %}
+    {% trans 'Countries List' %} - {{ block.super }}
+{% endblock %}
+
+{% block title %}<h2>{% trans 'Country List' %}</h2>{% endblock %}
+
+{% block subnav_active %}countries{% endblock %}
 
 {% block body %}
+    <form method="GET" action=".">
+        <ul class="form">
+            {{ form.as_ul }}
+            <li>
+                <input name="search" id="search" type="submit" value="{% trans 'go' %}" />
+            </li>
+        </ul>
+    </form>
     {% if queryset %}
-        {% autopaginate queryset 50 %}
+        {% autopaginate queryset ITEMS_PER_PAGE %}
         <ul>
         {% for country in queryset %}
             <li>{% include "jamendo/countries/detail.html" %}</li>
