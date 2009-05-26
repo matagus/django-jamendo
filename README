@@ -6,7 +6,7 @@ by Matías Agustín Méndez - matagus[at]gmail.com
 published under New BSD License
 
 So far it only contains models, urls, views and templates giving you a
-full browsable-data app. It lacks of seach features, jamendo webservice/api
-updates for some models fields (ie: album image) or entire models (revisions,
-playlists, etc), feeds (rss/atom) and some other features that I¡ll be
+full browsable-data app. It lacks of jamendo webservice/api updates for
+some models fields (ie: album image) or entire models (revisions,
+playlists, etc), feeds (rss/atom) and some other features that I'll be
 developing during nexts months. Please see TODO file in root directory.
