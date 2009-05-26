@@ -50,6 +50,18 @@
             </a>
         </li>
         {% endif %}
+        {% if instance.tags %}
+        <li>
+            <h4 class="tags">{% trans "tags" %}</h4>
+            <ul class="tags list">
+                {% for tag in instance.tags.all %}
+                    <li>
+                        <a href="{% url jamendo_tag tag.name %}" title="{{ tag.name }}">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
         {% if instance.album_set.all %}
         <li>
             <h4>{% trans "Albums" %}</h4>
@@ -66,17 +78,5 @@
             <label>{% trans 'Total' %}:</label>
             {{ instance.album_count }}
         </li>
-        {% if instance.tags %}
-        <li>
-            <h4>{% trans "Tags" %}</h4>
-            <ul class="tags list">
-                {% for tag in instance.tags.all %}
-                    <li>
-                        <a href="{% url jamendo_tag tag.name %}" title="{{ tag.name }}">{{ tag.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
-        {% endif %}
     </ul>
 {% endblock %}

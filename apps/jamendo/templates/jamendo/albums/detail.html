@@ -11,8 +11,10 @@
     {% trans 'by' %}
     <a title="{{ album.artist.name }}" href='{% url jamendo_artist album.artist.pk %}'>{{ album.artist.name }}</a>
 </div>
-<div class="detail listen">
-    ({{ album.get_human_duration }}, {{ album.release_date.year }}) {{ album.uid }}
+<div class="detail">
+    ({{ album.get_human_duration }}, {{ album.release_date.year }})
+</div>
+<div class="listen">
     {% trans 'Listen' %}: <a href="{{ album.get_ogg_url }}" title="{% trans 'Listen in OGG format' %}">{% trans 'ogg' %}</a> <a href="{{ album.get_mp3_url }}" title="{% trans 'Listen in MP3 format' %}">{% trans 'mp3' %}</a>
 </div>
 
