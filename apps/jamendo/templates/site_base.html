@@ -2,7 +2,10 @@
 <html>
     <head>
         <title>{% block head_title %}{% trans "jamendo browser" %}{% endblock %}</title>
+        <link href="{{ MEDIA_URL }}favicon.gif" rel="SHORTCUT ICON">
         <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/base.css?p=" />
+        {% block extra_head %}
+        {% endblock %}
     </head>
     <body>
         <span>{% trans 'django powered' %}</span>

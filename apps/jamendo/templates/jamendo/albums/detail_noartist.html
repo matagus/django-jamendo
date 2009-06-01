@@ -7,6 +7,6 @@
     <p>({{ album.get_human_duration }}, {{ album.release_date.year }})</p>
 </div>
 <div class="detail listen">
-    {% trans 'Listen' %}: <a href="{{ album.get_ogg_url }}" title="{% trans 'Listen in OGG format' %}">{% trans 'ogg' %}</a> <a href="{{ album.get_mp3_url }}" title="{% trans 'Listen in MP3 format' %}">{% trans 'mp3' %}</a>
+    {% trans 'Listen' %}: <a href="{{ album.get_playlist_url }}" title="{% trans 'Listen in OGG format' %}">{% trans 'ogg' %}</a> <a href="{{ album.get_mp3_playlist_url }}" title="{% trans 'Listen in MP3 format' %}">{% trans 'mp3' %}</a>
 </div>
 

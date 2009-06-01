@@ -68,11 +68,21 @@ class Album(HistoryMixin, TaggedMixin):
         return tags
 
     def get_mp3_url(self):
-        return "http://api.jamendo.com/get2/stream/album/m3u/?id=%d&streamencoding=mp31" % self.uid
+        # redirects to stream url for the first track of this album,
+        # since jamendo api does not allow us to get the download url :(
+        return "http://api.jamendo.com/get2/stream/album/redirect/?id=%d&streamencoding=mp31" % self.uid
     
     def get_ogg_url(self):
-        return "http://api.jamendo.com/get2/stream/album/m3u/?id=%d&streamencoding=ogg2" % self.uid
+        # redirects to stream url for the first track of this album,
+        # since jamendo api does not allow us to get the download url :(
+        return "http://api.jamendo.com/get2/stream/album/redirect/?id=%d&streamencoding=ogg2" % self.uid
 
+    def get_playlist_url(self, encoding="ogg2", ptype="m3u"):
+        return "http://api.jamendo.com/get2/stream/album/%s/?id=%d&streamencoding=%s" % (ptype, self.uid, encoding)
+
+    def get_mp3_playlist_url(self, ptype="m3u"):
+        return self.get_playlist_url(encoding="mp31", ptype=ptype)
+    
     def get_human_duration(self):
         return u"%d:%.2d" % (self.duration / 60, self.duration % 60)
     

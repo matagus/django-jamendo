@@ -5,6 +5,11 @@
     {{ instance.name }} - {{ instance.artist.name }} - {{ block.super }}
 {% endblock %}
 
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title='{% trans "jamendo browser" %} - Atom'
+        href="/jamendo/feeds/albumsfor/{{ instance.artist.pk }}/" />
+{% endblock %}
+
 {% block title %}{% endblock %}
 
 {% block body %}
@@ -14,16 +19,16 @@
             {{ instance.artist.name }}
         </a>
     </h4>
+    <img src="{{ MEDIA_URL }}albums/{{ instance.uid }}.jpg" title="{{ instance.name }}"/>
     <div class="album player">
         {% trans 'Listen' %}
-        <a href="{{ instance.get_ogg_url }}" title="{% trans 'Listen in OGG format' %}">
+        <a href="{{ instance.get_playlist_url }}" title="{% trans 'Listen in OGG format' %}">
             {% trans 'OGG stream' %}
         </a>
-        <a href="{{ instance.get_mp3_url }}" title="{% trans 'Listen in MP3 format' %}">
+        <a href="{{ instance.get_mp3_playlist_url }}" title="{% trans 'Listen in MP3 format' %}">
             {% trans 'MP3 stream' %}
         </a>
     </div>
-    <img src="{{ MEDIA_URL }}albums/{{ instance.uid }}.jpg" title="{{ instance.name }}"/>
     <ul class="album detail">
         {% if instance.mbguid %}
             <li>
@@ -42,6 +47,10 @@
         <li>
             <label>{% trans 'Release Date' %}:</label>
             {{ instance.release_date.year }}
+        </li>
+        <li>
+            <label>{% trans 'Duration' %}:</label>
+            {{ instance.get_human_duration }}
         </li>
         {% if instance.genre %}
             <li>

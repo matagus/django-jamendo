@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
 
 from tagging.models import Tag, TaggedItem
-from jamendo.models import Artist, Album, License, Country, Track
+from jamendo.models import Artist, Album, License, Country, Track, City
 from jamendo.forms import NameSearchForm
 
 
@@ -79,7 +79,7 @@ class ShowView(BaseView):
         try:
             self.get_instance(*args, **kwargs)
         except self.model.DoesNotExist:
-            return Http404
+            raise Http404
         except KeyError:
             return HttpResponseBadRequest()
 
@@ -214,6 +214,41 @@ class CountryShow(ShowView):
 
     def get_instance(self, *args, **kwargs):
         self.instance = self.model.objects.get(code=kwargs["code"])
+
+class CitiesList(ListView):
+    
+    def __init__(self, *args, **kwargs):
+        super(CitiesList, self).__init__(*args, **kwargs)
+
+    def get_queryset(self, request):
+        if request.GET.get("name"):
+            qs = City.objects.filter(name__icontains=request.GET.get("name"))
+        else:
+            qs = City.objects.all()
+        qs = qs.order_by("name")
+        return qs
+
+    def get_template_paths(self):
+        templates_list = ("jamendo/cities/list.html", )
+        return templates_list
+
+class CityShow(ShowView):
+    
+    def __init__(self, *args, **kwargs):
+        super(CityShow, self).__init__(City, *args, **kwargs)
+
+    def get_template_paths(self):
+        templates_list = ("jamendo/cities/show.html", )
+        return templates_list
+
+    def get_params_dict(self):
+        artists_qs = Artist.objects.filter(
+            city=self.instance).distinct().order_by("name")
+        return {"artists": artists_qs}
+
+    def get_instance(self, *args, **kwargs):
+        self.instance = self.model.objects.get(pk=kwargs["pk"])
+        print self.instance
 
 class LicensesList(ListView):
     

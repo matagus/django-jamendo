@@ -2,17 +2,12 @@
 {% load i18n pagination_tags %}
 
 {% block head_title %}
-    {% trans 'Countries List' %} - {{ block.super }}
+    {% trans 'Cities List' %} - {{ block.super }}
 {% endblock %}
 
-{% block extra_head %}
-    <link rel="alternate" type="application/atom+xml" title='{% trans "jamendo browser" %} - Atom'
-        href="/jamendo/feeds/artists/" />
-{% endblock %}
+{% block title %}<h2>{% trans 'City List' %}</h2>{% endblock %}
 
-{% block title %}<h2>{% trans 'Country List' %}</h2>{% endblock %}
-
-{% block subnav_active %}countries{% endblock %}
+{% block subnav_active %}cities{% endblock %}
 
 {% block body %}
     <form method="GET" action=".">
@@ -26,13 +21,13 @@
     {% if queryset %}
         {% autopaginate queryset ITEMS_PER_PAGE %}
         <ul>
-        {% for country in queryset %}
-            <li>{% include "jamendo/countries/detail.html" %}</li>
+        {% for city in queryset %}
+            <li>{% include "jamendo/cities/detail.html" %}</li>
         {% endfor %}
         </ul>
         {% paginate %}
     {% else %}
-        <p>{% trans 'There are no countries to show.' %}</p>
+        <p>{% trans 'There are no cities to show.' %}</p>
     {% endif %}
 {% endblock %}
 		

@@ -1,0 +1,29 @@
+{% load i18n %}
+<img src="/media/artists/{{ instance.image }}" title="{{ instance.name }}"/>
+<ul class="artist detail">
+    <li>
+        <label>{% trans 'Page at Jamendo' %}:</label>
+        <a href="{{ instance.url }}" title="{% trans 'Page at Jamendo' %}">
+            {% trans 'link' %}
+        </a>
+    </li>
+    {% if instance.city.name %}
+        <li>
+            <label>{% trans 'City' %}:</label>
+                {{ instance.city.name }}
+        </li>
+    {% endif %}
+    {% if instance.city.state.country.pk %}
+    <li>
+        <label>{% trans 'Country' %}:</label>
+        {{ instance.city.state.country.printable_name }}
+    </li>
+    {% endif %}
+    <li>
+        <label>{% trans 'Available albums' %}:</label>
+        {{ instance.album_count }}
+    </li>
+    {% if instance.tags %}
+        <li><strong>{% trans 'tags' %}</strong>: {{ instance.tags|join:", " }}</li>
+    {% endif %}
+</ul>

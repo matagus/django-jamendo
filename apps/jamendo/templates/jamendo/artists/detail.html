@@ -1,6 +1,6 @@
 {% load i18n %}
 <a title='{{ artist.name }}' href="{% url jamendo_artist artist.pk %}">
-    <img class="image small" src="{{ MEDIA_URL }}artists/50x50/{{ artist.uid }}.jpg" title="{{ artist.name }}" />
+    <img class="image small" src="{{ MEDIA_URL }}artists/50x50/{{ artist.image }}" title="{{ artist.name }}" />
 </a>
 <a title="{{ artist.name }}" href="{% url jamendo_artist artist.pk %}">{{ artist.name }}</a>
 <div class="detail">

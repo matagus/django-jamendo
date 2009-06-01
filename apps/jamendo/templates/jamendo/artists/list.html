@@ -5,6 +5,11 @@
     {% trans 'Artists List' %} - {{ block.super }}
 {% endblock %}
 
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title='{% trans "jamendo browser" %} - Atom'
+        href="/jamendo/feeds/artists/" />
+{% endblock %}
+
 {% block title %}<h2>{% trans 'Artist List' %}</h2>{% endblock %}
 
 {% block subnav_active %}artists{% endblock %}

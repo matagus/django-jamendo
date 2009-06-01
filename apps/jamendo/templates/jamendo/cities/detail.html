@@ -1,0 +1,5 @@
+{% if city.pk %}
+    <a title="{{ city.name }}" href="{% url jamendo_city city.pk %}">{{ city.name }}</a>
+{% else %}
+    <a title="{{ city.name }}">{{ city.name }}</a>
+{% endif %}

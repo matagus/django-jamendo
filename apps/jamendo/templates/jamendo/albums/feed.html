@@ -1,0 +1,35 @@
+{% load i18n %}
+<img src="/media/albums/{{ instance.uid }}.jpg" title="{{ instance.name }}"/>
+<ul class="album detail">
+    <li>
+        <label>{% trans 'Page at Jamendo' %}:</label>
+        <a href="{{ instance.url }}" title="{% trans 'Page at Jamendo' %}">
+            {% trans 'link' %}
+        </a>
+    </li>
+    <li>
+        <label>{% trans 'Release Date' %}:</label>
+        {{ instance.release_date.year }}
+    </li>
+    <li>
+        <label>{% trans 'Duration' %}:</label>
+        {{ instance.get_human_duration }}
+    </li>
+    {% if instance.genre %}
+        <li>
+            <label>{% trans 'Genre' %}:</label>
+            {{ instance.genre.name }}
+        </li>
+    {% endif %}
+    <li>
+        <label>{% trans 'License' %}:</label>
+        {{ instance.license.name }}
+    </li>
+    <li>
+        <label>{% trans 'Total tracks' %}:</label>
+        {{ instance.track_count }}
+    </li>
+    {% if instance.get_tags %}
+        <li><strong>{% trans 'tags' %}</strong>: {{ instance.get_tags|join:", " }}</li>
+    {% endif %}
+</ul>

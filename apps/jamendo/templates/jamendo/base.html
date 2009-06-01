@@ -1,6 +1,10 @@
 {% extends "site_base.html" %}
-
 {% load i18n %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title='{% trans "jamendo browser" %} - Atom'
+        href="/jamendo/feeds/albums/" />
+{% endblock %}
 
 {% block rtab_id %}id="jamendos_tab"{% endblock %}
 

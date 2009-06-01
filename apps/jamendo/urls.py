@@ -4,7 +4,10 @@
 from django.conf.urls.defaults import patterns, url
 
 from jamendo.views import ArtistsList, ArtistShow, AlbumsList, AlbumShow,\
-    TagsCloud, TagShow, CountriesList, CountryShow, LicensesList, LicenseShow
+    TagsCloud, TagShow, CountriesList, CountryShow, LicensesList, LicenseShow,\
+    CitiesList, CityShow
+from jamendo.feeds import ArtistsFeed, AlbumsFeed, AlbumsForFeed
+
 
 urlpatterns = patterns("jamendo.views",
     # artists urls
@@ -28,8 +31,19 @@ urlpatterns = patterns("jamendo.views",
     url(r"^countries/(?P<code>\w+)/$", CountryShow(), name="jamendo_country"),
     url(r"^countries/juid/(?P<juid>\d+)/$", CountryShow(), name="jamendo_country_juid"),
 
+    # cities urls
+    url(r"^cities/$", CitiesList(), name="jamendo_cities"),
+    url(r"^cities/(?P<pk>\w+)/$", CityShow(), name="jamendo_city"),
+    url(r"^cities/juid/(?P<juid>\d+)/$", CityShow(), name="jamendo_city_juid"),
+    
     # licenses urls
     url(r"^licenses/$", LicensesList(), name="jamendo_licenses"),
     url(r"^licenses/(?P<pk>\d+)/$", LicenseShow(), name="jamendo_license"),
     url(r"^licenses/juid/(?P<juid>\d+)/$", LicenseShow(), name="jamendo_license_juid"),
+)
+
+urlpatterns += patterns("",
+    (r"^feeds/(.*)/$", "django.contrib.syndication.views.feed", {
+        "feed_dict": {"artists": ArtistsFeed, "albums": AlbumsFeed, "albumsfor": AlbumsForFeed}
+    }),
 )
