@@ -1,0 +1,7 @@
+include INSTALL
+include LICENSE
+include README
+include TODO
+include ez_setup.py
+recursive-include apps/jamendo/templates *
+recursive-include apps/jamendo/locale *
